@@ -30,6 +30,7 @@ import java.lang.annotation.Target;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -197,7 +198,7 @@ class S3ResourceIntegrationTests {
 
 		// create file larger than single part size in multipart upload to make sure that file can be successfully
 		// uploaded in parts
-		File file = File.createTempFile("s3resource", "test");
+		File file = Files.createTempFile("s3resource","test").toFile();
 		byte[] b = new byte[DEFAULT_PART_SIZE * 2];
 		new Random().nextBytes(b);
 		Files.write(b, file);

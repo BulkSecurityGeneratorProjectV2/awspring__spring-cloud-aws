@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.security.DigestOutputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -82,7 +83,7 @@ abstract class AbstractTempFileS3OutputStream extends S3OutputStream {
 		this.location = location;
 		this.objectMetadata = objectMetadata;
 		this.contentTypeResolver = contentTypeResolver;
-		this.file = File.createTempFile("TempFileS3OutputStream", UUID.randomUUID().toString());
+		this.file = Files.createTempFile("TempFileS3OutputStream",UUID.randomUUID().toString()).toFile();
 		try {
 			hash = MessageDigest.getInstance("MD5");
 			localOutputStream = new BufferedOutputStream(new DigestOutputStream(new FileOutputStream(file), hash));
